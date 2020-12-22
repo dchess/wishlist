@@ -4,14 +4,19 @@ $(function () {
     // Grab the template script
     var wishlistTemplate = $("#list-template").html();
     var itemCard = $("#card-template").html();
-    var amazonList = $("#amazon-items").html();
+    var wishList = $("#wishlist-template").html();
+    var choiceTemplate = $("#choices-template").html();
 
     // Compile the template
     var theTemplate = Handlebars.compile(wishlistTemplate);
     Handlebars.registerPartial("card", itemCard);
+    Handlebars.registerPartial("wishlist", wishList);
+    Handlebars.registerPartial("choices", choiceTemplate);
 
 
     var context = {
+        "total": null,
+        "selections": [],
         "cards": [
             {
                 "title": "Snow Boots",
@@ -204,5 +209,26 @@ $(function () {
         $("#text-" + card).toggle();
         $("#price-" + card).toggle();
         $("#img-" + card).toggle();
+        var choice = context.cards[card - 1];
+        if (context.selections.includes(choice)) {
+            var index = context.selections.indexOf(choice);
+            if (index > -1) {
+                context.selections.splice(index, 1);
+            }
+        }
+        else {
+            context.selections.push(choice);
+        }
+        if (context.total) {
+            context.total = parseFloat(context.total) + parseFloat(choice.price.substring(1));
+        }
+        else {
+            context.total = parseFloat(choice.price.substring(1));
+        }
+        var thePartial = Handlebars.compile(choiceTemplate);
+        var compiledPartial = thePartial(context);
+        $('.choices-placeholder').html(compiledPartial);
+
+
     });
 });

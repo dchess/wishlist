@@ -26,12 +26,32 @@
 
 <body>
     <script id="list-template" type="text/x-handlebars-template">
-        <div class="container">    
-            <div class="row pt-3">
-                {{#each cards}}
-                {{> card}}
-                {{/each}}
-            </div>
+        <div class="container">
+            <ul class="nav nav-tabs pt-3" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <a class="nav-link active" id="list-tab" data-bs-toggle="tab" href="#wishlist" role="tab" aria-controls="home" aria-selected="true">WishList</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <a class="nav-link" id="choices-tab" data-bs-toggle="tab" href="#choices" role="tab" aria-controls="profile" aria-selected="false">Choices</a>
+                </li>
+              </ul>
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="wishlist" role="tabpanel" aria-labelledby="list-tab">
+                    {{> wishlist}}
+                </div>
+                <div class="tab-pane fade" id="choices" role="tabpanel" aria-labelledby="choices-tab">
+                    {{> choices}}
+                    <div class="choices-placeholder"></div>
+                </div>
+              </div>
+        </div>
+    </script>
+
+    <script id="wishlist-template" type="text/x-handlebars-template">
+        <div class="row pt-3">
+            {{#each cards}}
+            {{> card}}
+            {{/each}}
         </div>
     </script>
 
@@ -45,18 +65,27 @@
                     <h4 class="card-text" id="price-{{id}}">{{price}}</h4>
                     <!-- <a href="{{link}}" class="btn btn-primary btn-lg">Choose</a> -->
                     <div class="d-grid gap-2">
-                        <button id="btn-{{id}}" class="btn btn-success btn-lg choice-btn" type="button" data-text-swap="Remove" data-text-original="Choose">Choose</button>
-                      </div>
+                        <button id="btn-{{id}}" class="btn btn-success btn-lg choice-btn" type="button" data-text-swap="Remove"
+                            data-text-original="Choose">Choose</button>
+                    </div>
                 </div>
             </div>
         </div>
     </script>
 
-    <!--Your new content will be displayed in here-->
+    <script id="choices-template" type="text/x-handlebars-template">
+        {{#if total}}
+        <h3>Total: ${{total}}</h3>
+        {{/if}}
+        <ul>
+            {{#each selections}}
+            <li><a href="{{link}}">{{title}}: {{price}}</a></li>
+            {{/each}}
+        </ul>
+    </script>
+
+    <!-- Where compiled content displays -->
     <div class="content-placeholder"></div>
-
-
-    </div>
 </body>
 
 </html>
