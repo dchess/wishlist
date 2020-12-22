@@ -4,6 +4,12 @@
     object-fit: scale-down;
 }
 
+.card-img-left {
+    width: 15vw;
+    height: 15vh;
+    object-fit: scale-down;
+}
+
 .card-text {
     -webkit-line-clamp: 2;
     overflow : hidden;

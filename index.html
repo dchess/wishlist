@@ -75,13 +75,24 @@
 
     <script id="choices-template" type="text/x-handlebars-template">
         {{#if total}}
-        <h3>Total: ${{total}}</h3>
+        <h3 class="pb-2 pt-2 text-end">Total: ${{total}}</h3>
         {{/if}}
-        <ul>
-            {{#each selections}}
-            <li><a href="{{link}}">{{title}}: {{price}}</a></li>
-            {{/each}}
-        </ul>
+       {{#each selections}}
+       <div class="card mb-3">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="{{img}}" alt="{{title}}" class="card-img-left">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title"><a href="{{link}}">{{title}}</a></h5>
+              <p class="card-text"><small class="text-muted">{{text}}</small></p>
+              <p class="card-text">${{price}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+       {{/each}}
     </script>
 
     <!-- Where compiled content displays -->
