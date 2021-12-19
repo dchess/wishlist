@@ -41,12 +41,12 @@ $(function () {
                 var index = context.selections.indexOf(choice);
                 if (index > -1) {
                     context.selections.splice(index, 1);
-                    context.total = (context.total - choice.price).toFixed(2);
+                    context.total = (context.total).toFixed(2) - (choice.price).toFixed(2);
                 }
             }
             else {
                 context.selections.push(choice);
-                context.total = (context.total + choice.price).toFixed(2);
+                context.total = (context.total).toFixed(2) + (choice.price).toFixed(2);
             }
             var thePartial = Handlebars.compile(choiceTemplate);
             var compiledPartial = thePartial(context);
