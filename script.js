@@ -48,7 +48,8 @@ $(function () {
                 context.selections.push(choice);
                 context.total = context.total + choice.price;
             }
-            context.total = (context.total).toFixed(2)
+            context.total = Number.parseFloat(context.total).toFixed(2)
+            context.total = Number.parseFloat(context.total)
             var thePartial = Handlebars.compile(choiceTemplate);
             var compiledPartial = thePartial(context);
             $('.choices-placeholder').html(compiledPartial);
